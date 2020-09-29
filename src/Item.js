@@ -1,38 +1,36 @@
 import React,{ useState } from "react";
 
-const Item = ({ content }) => {
+const Item = ({ content, id , deleteTodo}) => {
   const [isDone, setIsDone] = useState(false);
 
+  const handleDelete = () => {
+    // todosからtodoを削除する処理
+    deleteTodo(id)
+  }
+
   return(
-  <li>
-    <input 
-      type="checkbox"
-      onChange= {
-        () => {
-          setIsDone(!isDone)
-        }
-      }
-    />
-    <span style={{
-      textDecoration: isDone ? 'line-through' :'none'
-    }}>{content}</span>
-  </li>
+      <li style={{
+      listStyle: 'none'
+    }}>
+        <input 
+          type="checkbox"
+          onChange= {
+            () => {
+              setIsDone(!isDone)
+            }
+          }
+        />
+        <span style={{
+          textDecoration: isDone ? 'line-through' :'none'
+        }}>{content}</span>
+
+        <button
+          onClick = {handleDelete}
+        >
+            削除
+        </button>
+      </li>
   )
 };
 
 export default Item;
-
-
-// const array = ['apple', 'banana']
-// const [fruit1, fruit2] = array
-
-// const user = {name: 'Fukuda', from: 'Japan'}
-// const {name, from} = user
-
-// console.log(name, from)
-
-// const intro = ({ name, from}) => {
-//   return `I'm ${name} from ${from}`
-// }
-
-// intro(user)
